@@ -1,0 +1,1 @@
+//la vista que tiene los3 botones grandes de las diferentes opciones
