@@ -1,0 +1,1 @@
+//para agregar el nip de registrar la salida
