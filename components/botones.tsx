@@ -9,7 +9,7 @@ interface BotonMainProps{
 export const BotonMain =({texto, onPress, color=true}:BotonMainProps)=>{
     return(
         <TouchableOpacity style={[styles.boton, {backgroundColor: color ? '#6F42C1' : '#6F42C1CC' }]} onPress={onPress}>
-            <Text>{texto}</Text>
+            <Text style={styles.texto}>{texto}</Text>
         </TouchableOpacity>
     )
 
@@ -22,13 +22,15 @@ const styles  = StyleSheet.create({
         borderRadius:22,
         borderColor: '#7C52C9',
         borderWidth: 3, 
-        marginTop:50
+        marginTop:50,
+        justifyContent:'center'
     },
     texto:{
         fontWeight: 'bold',
         fontSize: 16,
         textAlign: 'center',
-        color: '#FFFFFF'
+        color:'#FFFFFF',
+        
 
     }
 })
