@@ -1,3 +1,21 @@
-//Esta corresponde a tu pantalla:
+import { router } from "expo-router";
+import { Text, TouchableOpacity, View } from "react-native";
 
-//“HOLA! usuario / contraseña
+export default function InicioSesionVista() {
+
+  const iniciarSesion = () => {
+    router.push("/menu");
+  };
+
+  return (
+    <View>
+
+      <Text>Login</Text>
+
+      <TouchableOpacity onPress={iniciarSesion}>
+        <Text>Entrar</Text>
+      </TouchableOpacity>
+
+    </View>
+  );
+}
