@@ -17,7 +17,7 @@ export const BotonMain =({texto, onPress, color=true}:BotonMainProps)=>{
 
 const styles  = StyleSheet.create({
     boton:{
-        height: 50,
+        height: 55,
         width: 300,
         borderRadius:22,
         borderColor: '#7C52C9',
