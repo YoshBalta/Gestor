@@ -1,10 +1,18 @@
+import { BotonMain } from '@/components/botones';
 import { MaterialIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-
+      <LinearGradient
+      colors={['#F3F4F6', '#F3F4F6', '#C592FC']}
+      locations={[0, 0.7, 1]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0, y: 1 }}
+      style={styles.container}
+    
+>
       <View style={styles.rectangulo}>
         <Text style={styles.titulo}>GoVisit</Text>
       </View>
@@ -30,10 +38,15 @@ export default function HomeScreen() {
           <MaterialIcons name="logout" size={24} color="white" />
           <Text style={styles.textButtons}>Registrar salida</Text>
         </TouchableOpacity>
+         
+        <BotonMain
+        texto='Ingresar'
+        onPress={()=> console.log('presionado')}
+        color={true}></BotonMain>
 
       </View>
 
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -41,7 +54,7 @@ const styles = StyleSheet.create({
 
   container:{
     flex:1,
-    backgroundColor:'#F5F5F5'
+
   },
 
   rectangulo:{
@@ -67,10 +80,12 @@ const styles = StyleSheet.create({
   botones:{
     flexDirection:'row',
     alignItems:'center',
-    width:260,
+    width:300,
     height:55,
-    backgroundColor:'#8d1a83',
-    borderRadius:12,
+    backgroundColor:'#6F42C1',
+    borderColor:'#7A4ECA',
+    borderWidth:3,
+    borderRadius:22,
     paddingHorizontal:15,
     marginBottom:30,
 
