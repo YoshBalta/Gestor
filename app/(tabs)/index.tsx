@@ -1,39 +1,36 @@
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
 
 export default function HomeScreen() {
   return (
-    <View style={styles.contenedor}>
+    <View style={styles.container}>
 
-      <Text style={styles.text}>Hola</Text>
-
-      <View style={styles.contenedorButtons}>
-      <TouchableOpacity style={styles.alinear}>
-        <Ionicons name="add" size={20} color="white" />
-        <Text style={styles.textButtons}>Agregar visitante</Text>
-      </TouchableOpacity>
+      <View style={styles.rectangulo}>
+        <Text style={styles.titulo}>GoVisit</Text>
       </View>
 
-      <View style={styles.contenedorButtons}>
-      <TouchableOpacity style={styles.alinear}>
-        <Ionicons name="add" size={20} color="white" />
-        <Text style={styles.textButtons}>Consultar Historial</Text>
-      </TouchableOpacity>
-      </View>
+      <View style={styles.content}>
 
-      <View style={styles.contenedorButtons}>
-      <TouchableOpacity style={styles.alinear}>
-        <Ionicons name="add" size={20} color="white" />
-        <Text style={styles.textButtons}>Agregar usuario</Text>
-      </TouchableOpacity>
-      </View>
+        <TouchableOpacity style={styles.botones}>
+          <MaterialIcons name="person-add" size={24} color="white" />
+          <Text style={styles.textButtons}>Agregar visitante</Text>
+        </TouchableOpacity>
 
-      <View style={styles.contenedorButtons}>
-      <TouchableOpacity style={styles.alinear}>
-        <Ionicons name="add" size={20} color="white" />
-        <Text style={styles.textButtons}>Registrar salida de visitante</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.botones}>
+          <MaterialIcons name="history" size={24} color="white" />
+          <Text style={styles.textButtons}>Consultar historial</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.botones}>
+          <MaterialIcons name="person-add-alt" size={24} color="white" />
+          <Text style={styles.textButtons}>Agregar usuario</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.botones}>
+          <MaterialIcons name="logout" size={24} color="white" />
+          <Text style={styles.textButtons}>Registrar salida</Text>
+        </TouchableOpacity>
+
       </View>
 
     </View>
@@ -41,34 +38,53 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  contenedor:{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#Ffff'
+
+  container:{
+    flex:1,
+    backgroundColor:'#F5F5F5'
   },
-  contenedorButtons:{
-    borderRadius: 10,
-    height: 40,
-    width:250,
-    backgroundColor: '#8d1a83',
-    marginBottom:40,
+
+  rectangulo:{
+    width:'100%',
+    height:80,
+    backgroundColor:'#8d1a83',
+    justifyContent:'center',
+    paddingLeft:20,
   },
+
+  titulo:{
+    color:'white',
+    fontSize:22,
+    fontWeight:'bold'
+  },
+
+  content:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+
+  botones:{
+    flexDirection:'row',
+    alignItems:'center',
+    width:260,
+    height:55,
+    backgroundColor:'#8d1a83',
+    borderRadius:12,
+    paddingHorizontal:15,
+    marginBottom:30,
+
+    shadowColor:'#000',
+    shadowOpacity:0.2,
+    shadowRadius:5,
+    elevation:4
+  },
+
   textButtons:{
-    color:'#ffff',
-    textAlign:'center',
-    fontSize:15,
-    fontWeight: '600',
-    paddingLeft:10,
-    marginTop:1
-  },
- text: {
-  fontSize: 12,
-  color: "#ffffff"
- },
- alinear:{
-  flexDirection: 'row',
-  paddingTop:7,
-  marginLeft:15
- }
+    color:'white',
+    fontSize:16,
+    fontWeight:'600',
+    marginLeft:15
+  }
+
 });
