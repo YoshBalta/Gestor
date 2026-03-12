@@ -3,12 +3,12 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 interface BotonMainProps{
     texto: string;
     onPress:()=> void;
-    color:boolean;
+    color?:string;
 }
 
-export const BotonMain =({texto, onPress, color=true}:BotonMainProps)=>{
+export const BotonMain =({texto, onPress, color}:BotonMainProps)=>{
     return(
-        <TouchableOpacity style={[styles.boton, {backgroundColor: color ? '#6F42C1' : '#6F42C1CC' }]} onPress={onPress}>
+        <TouchableOpacity style={[styles.boton, {backgroundColor: color='#6F42C1'}]} onPress={onPress}>
             <Text style={styles.texto}>{texto}</Text>
         </TouchableOpacity>
     )
