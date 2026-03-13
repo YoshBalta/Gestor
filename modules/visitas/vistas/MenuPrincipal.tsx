@@ -25,7 +25,7 @@ export default function MenuPrincipal() {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.botones}
-          onPress={() => router.push("/registrar")}>
+          onPress={() => router.push("/visitas/registrar")}>
           <MaterialIcons name="person-add-alt" size={24} color="white" />
           <Text style={styles.textButtons}>Agregar usuario</Text>
         </TouchableOpacity>
@@ -67,12 +67,12 @@ const styles = StyleSheet.create({
   botones: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 300, // Lo hizo un poco más ancho (antes 260)
+    width: 300, 
     height: 55,
-    backgroundColor: '#6F42C1', // Color nuevo de tu amigo
-    borderColor: '#7A4ECA',     // Borde nuevo
+    backgroundColor: '#6F42C1', 
+    borderColor: '#7A4ECA',    
     borderWidth: 3,
-    borderRadius: 22,           // Más redondeado (antes 12)
+    borderRadius: 22,          
     paddingHorizontal: 15,
     marginBottom: 30,
     shadowColor: '#000',
