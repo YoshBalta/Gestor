@@ -1,5 +1,7 @@
+import { BackgroundGradient } from "@/components/backgroundGradiente";
+import { BotonMain } from "@/components/botones";
+import { InputsLogueo } from "@/components/InputsLogueo";
 import { router } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
 
 export default function InicioSesionVista() {
 
@@ -8,14 +10,25 @@ export default function InicioSesionVista() {
   };
 
   return (
-    <View>
+    
+    <BackgroundGradient
+    titulo="Hola">
 
-      <Text>Login</Text>
+      <InputsLogueo  
+      texto="Usuario"
+      icono="person"/>
 
-      <TouchableOpacity onPress={iniciarSesion}>
-        <Text>Entrar</Text>
-      </TouchableOpacity>
+      <InputsLogueo
+      texto="Contraseña" 
+      valor={true}
+      icono="key"/>
 
-    </View>
+      <BotonMain 
+      texto="Iniciar Sesión"
+      onPress={iniciarSesion}
+      >
+      </BotonMain>
+
+    </BackgroundGradient>
   );
 }

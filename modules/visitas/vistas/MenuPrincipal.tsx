@@ -1,24 +1,12 @@
-import { BotonMain } from '@/components/botones';
+
+import { BackgroundGradient } from '@/components/backgroundGradiente';
 import { MaterialIcons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient'; // La dependencia que instalamos
 import { router } from 'expo-router';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export default function MenuPrincipal() {
   return (
-    <LinearGradient
-      colors={['#F3F4F6', '#F3F4F6', '#C592FC']}
-      locations={[0, 0.7, 1]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
-      style={styles.container}
-    >
-      {/* Encabezado */}
-      <View style={styles.rectangulo}>
-        <Text style={styles.titulo}>GoVisit</Text>
-      </View>
-
-      <View style={styles.content}>
+   <BackgroundGradient >
         {/* Tus botones con tus rutas, pero con el estilo nuevo */}
         <TouchableOpacity 
           style={styles.botones}
@@ -36,7 +24,8 @@ export default function MenuPrincipal() {
           <Text style={styles.textButtons}>Consultar historial</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botones}>
+        <TouchableOpacity style={styles.botones}
+          onPress={() => router.push("/registrar")}>
           <MaterialIcons name="person-add-alt" size={24} color="white" />
           <Text style={styles.textButtons}>Agregar usuario</Text>
         </TouchableOpacity>
@@ -49,14 +38,8 @@ export default function MenuPrincipal() {
           <Text style={styles.textButtons}>Registrar salida</Text>
         </TouchableOpacity>
 
-        {/* El botón extra que agregó tu amigo */}
-        <BotonMain
-          texto='Ingresar'
-          onPress={() => console.log('presionado')}
-          color={true}
-        />
-      </View>
-    </LinearGradient>
+      
+    </BackgroundGradient>
   );
 }
 
