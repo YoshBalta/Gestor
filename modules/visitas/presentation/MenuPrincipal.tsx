@@ -10,7 +10,7 @@ export default function MenuPrincipal() {
         {/* Tus botones con tus rutas, pero con el estilo nuevo */}
         <TouchableOpacity 
           style={styles.botones}
-          onPress={() => router.push("/visitas/agregar")}
+          onPress={() => router.push("/vistas/agregar")}
         >
           <MaterialIcons name="person-add" size={24} color="white" />
           <Text style={styles.textButtons}>Agregar visitante</Text>
@@ -18,21 +18,21 @@ export default function MenuPrincipal() {
 
         <TouchableOpacity 
           style={styles.botones}
-          onPress={() => router.push("/visitas/agregar")}
+          onPress={() => router.push("/vistas/historial")}
         >
           <MaterialIcons name="history" size={24} color="white" />
           <Text style={styles.textButtons}>Consultar historial</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.botones}
-          onPress={() => router.push("/visitas/registrar")}>
+          onPress={() => router.push("/vistas/agregar")}>
           <MaterialIcons name="person-add-alt" size={24} color="white" />
           <Text style={styles.textButtons}>Agregar usuario</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
           style={styles.botones}
-          onPress={() => router.push("/visitas/salida")}
+          onPress={() => router.push("/vistas/salida")}
         >
           <MaterialIcons name="logout" size={24} color="white" />
           <Text style={styles.textButtons}>Registrar salida</Text>

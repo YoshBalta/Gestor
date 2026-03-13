@@ -30,8 +30,8 @@ export default function RegistrarSalida (){
 
 const styles = StyleSheet.create({
     Image:{
-        width:'40%',
-        height:'20%'
+        width:90,
+        height:90
     }
 
 

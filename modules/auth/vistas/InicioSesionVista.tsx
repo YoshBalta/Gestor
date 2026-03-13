@@ -6,7 +6,7 @@ import { router } from "expo-router";
 export default function InicioSesionVista() {
 
   const iniciarSesion = () => {
-    router.push("/menu");
+    router.push("/vistas/menu");
   };
 
   return (
