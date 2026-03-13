@@ -28,7 +28,7 @@ export const BackgroundGradient = ({ children,titulo }: Props) => {
                     {children}
             </View>
 
-         <View style={styles.rectangulo}></View>
+         <View style={styles.rectangulo2}></View>
     </LinearGradient>
   );
 };
@@ -39,7 +39,16 @@ const styles = StyleSheet.create({
   },
    rectangulo: {
     width: '100%',
-    height: 80,
+    height: '10%',
+    backgroundColor: '#4A2E91',
+    justifyContent: 'space-between',
+    paddingLeft: 20,
+    flexDirection:'row',
+    alignItems:'center'
+  
+  }, rectangulo2: {
+    width: '100%',
+    height: '5%',
     backgroundColor: '#4A2E91',
     justifyContent: 'space-between',
     paddingLeft: 20,
@@ -58,7 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection:'column',
-    margin:50
+    padding:20
   },
   Mensaje: {
     color: '#4A2E91',

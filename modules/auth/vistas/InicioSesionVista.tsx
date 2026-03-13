@@ -1,6 +1,6 @@
 import { BackgroundGradient } from "@/components/backgroundGradiente";
 import { BotonMain } from "@/components/botones";
-import { Inputs } from "@/components/Inputs";
+import { InputsLogueo } from "@/components/InputsLogueo";
 import { router } from "expo-router";
 
 export default function InicioSesionVista() {
@@ -14,12 +14,14 @@ export default function InicioSesionVista() {
     <BackgroundGradient
     titulo="Hola">
 
-      <Inputs  
-      texto="Usuario"/>
+      <InputsLogueo  
+      texto="Usuario"
+      icono="person"/>
 
-      <Inputs
+      <InputsLogueo
       texto="Contraseña" 
-      valor={true}/>
+      valor={true}
+      icono="key"/>
 
       <BotonMain 
       texto="Iniciar Sesión"

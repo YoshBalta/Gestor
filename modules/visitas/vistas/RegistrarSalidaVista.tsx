@@ -1,10 +1,39 @@
-import { Text, View } from "react-native";
+import { BackgroundGradient } from "@/components/backgroundGradiente";
+import { BotonMain } from "@/components/botones";
+import { Inputs } from "@/components/Inputs";
+import React from "react";
+import { Image, StyleSheet } from "react-native";
 
 //para agregar el nip de registrar la salida
 export default function RegistrarSalida (){
     return (
-         <View>
-      <Text>Registrar salida</Text>
-    </View>
-    )
+         <BackgroundGradient 
+         titulo="Registrar salida">
+            
+                <Image style={styles.Image} source={require('@/assets/images/icon.png')}
+                />
+            
+            
+
+            <Inputs
+            texto="Ingresar ID"></Inputs>
+
+            <BotonMain 
+            texto="Registrar Salida"
+            onPress={()=>''}></BotonMain>
+
+
+
+         </BackgroundGradient>
+    );
 }
+
+const styles = StyleSheet.create({
+    Image:{
+        width:'40%',
+        height:'20%'
+    }
+
+
+
+})

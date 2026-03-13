@@ -6,7 +6,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export default function MenuPrincipal() {
   return (
-   <BackgroundGradient>
+   <BackgroundGradient >
         {/* Tus botones con tus rutas, pero con el estilo nuevo */}
         <TouchableOpacity 
           style={styles.botones}
@@ -24,7 +24,8 @@ export default function MenuPrincipal() {
           <Text style={styles.textButtons}>Consultar historial</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botones}>
+        <TouchableOpacity style={styles.botones}
+          onPress={() => router.push("/registrar")}>
           <MaterialIcons name="person-add-alt" size={24} color="white" />
           <Text style={styles.textButtons}>Agregar usuario</Text>
         </TouchableOpacity>
