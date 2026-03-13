@@ -1,4 +1,4 @@
-import HistorialVista from "@/modules/visitas/vistas/HistorialVista";
+import HistorialVista from "@/modules/visitas/presentation/HistorialVista";
 
 export default function Page() {
   return <HistorialVista />;

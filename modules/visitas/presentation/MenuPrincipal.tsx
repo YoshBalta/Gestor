@@ -18,7 +18,7 @@ export default function MenuPrincipal() {
 
         <TouchableOpacity 
           style={styles.botones}
-          onPress={() => router.push("/visitas/historial")}
+          onPress={() => router.push("/visitas/agregar")}
         >
           <MaterialIcons name="history" size={24} color="white" />
           <Text style={styles.textButtons}>Consultar historial</Text>
