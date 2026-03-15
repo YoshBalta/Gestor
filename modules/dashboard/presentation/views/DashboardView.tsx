@@ -25,7 +25,7 @@ export default function MenuPrincipal() {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.botones}
-          onPress={() => router.push("/vistas/agregar")}>
+          onPress={() => router.push("/vistas/registrar")}>
           <MaterialIcons name="person-add-alt" size={24} color="white" />
           <Text style={styles.textButtons}>Agregar usuario</Text>
         </TouchableOpacity>
