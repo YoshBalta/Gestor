@@ -10,7 +10,7 @@ import { router } from "expo-router";
 export default function RegistrarUsuario(){
 
       const RegistrarUsuario= () => {
-        router.push("/menu");
+        router.push("/vistas/menu");
       };
       
     return(
