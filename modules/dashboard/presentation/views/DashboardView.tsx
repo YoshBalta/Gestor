@@ -38,7 +38,7 @@ export default function MenuPrincipal() {
           <Text style={styles.textButtons}>Registrar salida</Text>
         </TouchableOpacity>
 
-      
+
     </BackgroundGradient>
   );
 }
