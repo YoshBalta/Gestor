@@ -1,5 +1,5 @@
 import { BackgroundGradient } from "@/components/backgroundGradiente";
-import { BotonMain } from "@/components/botones";
+import { BotonMain } from "@/components/buttons";
 import { Inputs } from "@/components/Inputs";
 
 //para la pantalla de los campos de agregar nombre, proposito
