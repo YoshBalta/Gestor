@@ -1,5 +1,5 @@
 import { BackgroundGradient } from "@/components/backgroundGradiente";
-import { BotonMain } from "@/components/botones";
+import { BotonMain } from "@/components/buttons";
 import { InputsLogueo } from "@/components/InputsLogueo";
 import { router } from "expo-router";
 
