@@ -9,6 +9,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import axios from 'axios';
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
 
 
@@ -38,11 +39,37 @@ export default function RegistrarUsuario(){
     useEffect(()=>{
         getRol()
     }, [])
+     
+
       
     return(
 
         <BackgroundGradient
         titulo="REGISTRAR ">
+
+            <Dropdown
+            style={styles.textInput}
+                data={dataRol}
+                search 
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                searchPlaceholderTextColor="#D1D5DB "
+                placeholder="Seleccionar"
+                searchPlaceholder="Buscar"
+               
+                value={valueRol}
+                onChange={(item:any) => {
+                    setValueRol(item.value);
+                }}
+                renderLeftIcon={() => (
+                    <AntDesign
+                    size={20}
+                    />
+                )}
+                />
+            
+        
 
             <InputsLogueo 
             texto="Nombre(s)"
@@ -58,24 +85,10 @@ export default function RegistrarUsuario(){
             texto="Usuario"
             icono="person">
             </InputsLogueo>
-
-            <Dropdown
-                data={dataRol}
-                search
-                maxHeight={300}
-                labelField="label"
-                valueField="value"
-                searchPlaceholder="Buscar"
-                value={valueRol}
-                onChange={(item:any) => {
-                    setValueRol(item.value);
-                }}
-                renderLeftIcon={() => (
-                    <AntDesign
-                    size={20}
-                    />
-                )}
-                />
+            
+          
+            
+            
 
             <InputsLogueo
             texto="Contraseña"
@@ -91,3 +104,26 @@ export default function RegistrarUsuario(){
 
     );
 }
+
+const styles = StyleSheet.create({
+
+    textInput: {
+        width:300,
+        height:55,
+        borderWidth:3,
+        borderColor:'#7C52C9',
+        borderRadius:12,
+        backgroundColor:'#F9FAFB',
+        marginTop:30,
+        paddingLeft:70, //recorre el texto del placeholder,
+        color:'#D1D5DB'
+        
+        
+    },
+   texto:{
+    fontSize:16
+    
+},
+
+
+})
