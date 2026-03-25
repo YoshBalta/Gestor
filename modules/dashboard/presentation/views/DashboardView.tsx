@@ -13,7 +13,7 @@ export default function MenuPrincipal() {
           onPress={() => router.push("/vistas/agregar")}
         >
           <MaterialIcons name="person-add" size={24} color="white" />
-          <Text style={styles.textButtons}>Agregar visitante</Text>
+          <Text style={styles.textButtons}>Registrar Entrada</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
@@ -21,13 +21,13 @@ export default function MenuPrincipal() {
           onPress={() => router.push("/vistas/historial")}
         >
           <MaterialIcons name="history" size={24} color="white" />
-          <Text style={styles.textButtons}>Consultar historial</Text>
+          <Text style={styles.textButtons}>Consultar Historial</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.botones}
           onPress={() => router.push("/vistas/registrar")}>
           <MaterialIcons name="person-add-alt" size={24} color="white" />
-          <Text style={styles.textButtons}>Agregar usuario</Text>
+          <Text style={styles.textButtons}>Agregar Usuario</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
@@ -35,7 +35,7 @@ export default function MenuPrincipal() {
           onPress={() => router.push("/vistas/salida")}
         >
           <MaterialIcons name="logout" size={24} color="white" />
-          <Text style={styles.textButtons}>Registrar salida</Text>
+          <Text style={styles.textButtons}>Registrar Salida</Text>
         </TouchableOpacity>
 
 
