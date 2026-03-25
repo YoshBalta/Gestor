@@ -1,4 +1,5 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 interface InputsProps{
@@ -7,15 +8,19 @@ interface InputsProps{
     icono?: keyof typeof MaterialIcons.glyphMap;
 
 }
-//maxLenght permite restringir el numero de caracteres
+
 export const InputsLogueo=({texto, valor,icono}:InputsProps)=>{
+
+    const [onfocus,setFocus]=useState(false);
+   
+
     return(
         
         <View style={styles.alinear}>
         <View style={styles.rectangulo}>
             <MaterialIcons name={icono} size={24} color="#E8D9FF" />
         </View>
-        <TextInput style={styles.textInput} placeholder={texto} placeholderTextColor='#D1D5DB' secureTextEntry={valor} maxLength={50}/>
+        <TextInput style={[styles.textInput, { borderColor:onfocus ? "#7C52C9" : "#7c52c9c6", borderWidth:onfocus ? 4 : 3 }]} onFocus={()=>setFocus(true) }  onBlur={()=> setFocus(false)} placeholder={texto} placeholderTextColor='#D1D5DB' secureTextEntry={valor} maxLength={50} />
         </View>
         
     )

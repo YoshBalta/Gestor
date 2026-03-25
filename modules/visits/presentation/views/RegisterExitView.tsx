@@ -10,7 +10,7 @@ export default function RegistrarSalida (){
          <BackgroundGradient 
          titulo="Registrar salida">
             
-                <Image style={styles.Image} source={require('@/assets/images/icon.png')}
+                <Image style={styles.Image} source={require('@/assets/images/Screenshot_2026-03-24_221409-removebg-preview.png')}
                 />
             
             

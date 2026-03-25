@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: '10%',
     backgroundColor: '#4A2E91',
     justifyContent: 'space-between',
-    paddingLeft: 20,
+    paddingLeft: 2,
     flexDirection:'row',
     alignItems:'center'
   
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 22,
     fontWeight: 'bold',
-    padding:22
+    padding:5
   },
     content: {
     flex: 1,

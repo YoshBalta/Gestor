@@ -13,12 +13,15 @@ export default function DropdownScreen() {
     { label: 'Visitante', value: 'visitante' },
     { label: 'Comunidad', value: 'comunidad' }
   ];
+  
 
   return (
-    <BackgroundGradient>
+    <BackgroundGradient
+      
+      titulo="Registrar Entrada">
 
       <Dropdown
-        style={styles.textInput}
+        style={styles.textInput }
         data={data}
         search
         maxHeight={300}
@@ -27,7 +30,6 @@ export default function DropdownScreen() {
         placeholder="Seleccionar"
         searchPlaceholder="Buscar"
         searchPlaceholderTextColor="#D1D5DB"
-        
         value={rol}
         onChange={(item) => {
           setRol(item.value);
