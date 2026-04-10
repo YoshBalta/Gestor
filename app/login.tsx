@@ -1,5 +1,5 @@
-import InicioSesionVista from "@/modules/auth/presentation/views/InicioSesionVista";
+import LoginScreen from "@/modules/users/presentation/views/LoginView";
 
 export default function Login() {
-  return <InicioSesionVista />;
+  return <LoginScreen/>;
 }
