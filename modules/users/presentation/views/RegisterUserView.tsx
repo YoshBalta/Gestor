@@ -3,38 +3,26 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-export default function LoginScreen() {
+export default function RegisterUserView() {
 
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <BackgroundGradient titulo="Iniciar Sesión">
+    <BackgroundGradient titulo="Crear Cuenta">
 
       <View style={styles.form}>
 
-        <TextInput
-          placeholder="Usuario"
-          value={user}
-          onChangeText={setUser}
-          style={styles.input}
-        />
-
-        <TextInput
-          placeholder="Contraseña"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          style={styles.input}
-        />
+        <TextInput placeholder="Nombre" value={nombre} onChangeText={setNombre} style={styles.input} />
+        <TextInput placeholder="Apellidos" value={apellido} onChangeText={setApellido} style={styles.input} />
+        <TextInput placeholder="Usuario" value={user} onChangeText={setUser} style={styles.input} />
+        <TextInput placeholder="Contraseña" value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
 
         <TouchableOpacity style={styles.button} onPress={() => router.push('/vistas/menu')}>
-          <Text style={styles.buttonText}>Iniciar sesión</Text>
+          <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
-
-       <TouchableOpacity style={styles.button} onPress={() => router.push('/register')}>
-          <Text style={styles.buttonText}>Crear cuenta</Text>
-       </TouchableOpacity>
 
       </View>
 
@@ -45,7 +33,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   form: {
     width: '100%',
-    marginTop: 30,
+    marginTop: 20,
     alignItems: 'center'
   },
   input: {
@@ -67,11 +55,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontWeight: 'bold'
-  },
-  link: {
-    marginTop: 20,
-    color: '#4A2E91',
     fontWeight: 'bold'
   }
 });
