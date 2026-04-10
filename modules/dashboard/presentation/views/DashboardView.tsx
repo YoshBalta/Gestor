@@ -1,30 +1,51 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
+import { useAuth } from '@/context/AuthContext';
 import { router } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function DashboardView() {
 
+  const { user, setUser } = useAuth();
+
+  if (!user) {
+    return (
+      <BackgroundGradient titulo="Inicio">
+        <Text>No hay usuario</Text>
+      </BackgroundGradient>
+    );
+  }
+
+  const handleLogout = () => {
+    setUser(null);
+    router.replace('/');
+  };
+
   return (
     <BackgroundGradient titulo="Inicio">
 
       <View style={styles.container}>
 
-        <TouchableOpacity style={styles.button}>
+        {/* 🔥 BIENVENIDA */}
+        <Text style={styles.welcome}>
+          Bienvenido, {user.nombre}
+        </Text>
+
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/qr')}>
           <Text style={styles.text}>Mi QR</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={()=>router.push('/historial')}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/historial')}>
           <Text style={styles.text}>Mi historial</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={()=>router.push('/perfil')}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/perfil')}>
           <Text style={styles.text}>Mi perfil</Text>
         </TouchableOpacity>
 
         <Text style={styles.estado}>Estado: 🟢 Dentro</Text>
 
-        <TouchableOpacity style={styles.logout}>
+        <TouchableOpacity style={styles.logout} onPress={handleLogout}>
           <Text style={styles.logoutText}>Cerrar sesión</Text>
         </TouchableOpacity>
 
@@ -39,6 +60,12 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 20,
     alignItems: 'center'
+  },
+  welcome: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: '#4A2E91',
+    fontWeight: 'bold'
   },
   button: {
     width: '100%',

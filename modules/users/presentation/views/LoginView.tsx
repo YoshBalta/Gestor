@@ -1,12 +1,31 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
+import { useAuth } from '@/context/AuthContext'; // 👈 IMPORTANTE
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function LoginScreen() {
 
-  const [user, setUser] = useState('');
+  const [user, setUserInput] = useState(''); // 👈 renombrado
   const [password, setPassword] = useState('');
+
+  const { setUser } = useAuth(); // 👈 contexto
+
+  const handleLogin = () => {
+    if (!user || !password) {
+      alert('Completa todos los campos');
+      return;
+    }
+
+    // 🔥 simulamos login
+    setUser({
+      id: 1,
+      nombre: user
+    });
+
+    // 🔥 navegación (ajusta según tu estructura)
+    router.push('/vistas/menu'); 
+  };
 
   return (
     <BackgroundGradient titulo="Iniciar Sesión">
@@ -16,7 +35,7 @@ export default function LoginScreen() {
         <TextInput
           placeholder="Usuario"
           value={user}
-          onChangeText={setUser}
+          onChangeText={setUserInput}
           style={styles.input}
         />
 
@@ -28,13 +47,13 @@ export default function LoginScreen() {
           style={styles.input}
         />
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/vistas/menu')}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Iniciar sesión</Text>
         </TouchableOpacity>
 
-       <TouchableOpacity style={styles.button} onPress={() => router.push('/register')}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/register')}>
           <Text style={styles.buttonText}>Crear cuenta</Text>
-       </TouchableOpacity>
+        </TouchableOpacity>
 
       </View>
 
