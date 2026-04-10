@@ -1,43 +1,34 @@
-
 import { BackgroundGradient } from '@/components/backgroundGradiente';
-import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function MenuPrincipal() {
+export default function DashboardView() {
+
   return (
-   <BackgroundGradient >
-        {/* Tus botones con tus rutas, pero con el estilo nuevo */}
-        <TouchableOpacity 
-          style={styles.botones}
-          onPress={() => router.push("/vistas/agregar")}
-        >
-          <MaterialIcons name="person-add" size={24} color="white" />
-          <Text style={styles.textButtons}>Agregar visitante</Text>
+    <BackgroundGradient titulo="Inicio">
+
+      <View style={styles.container}>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.text}>Mi QR</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={styles.botones}
-          onPress={() => router.push("/vistas/historial")}
-        >
-          <MaterialIcons name="history" size={24} color="white" />
-          <Text style={styles.textButtons}>Consultar historial</Text>
+        <TouchableOpacity style={styles.button} onPress={()=>router.push('/historial')}>
+          <Text style={styles.text}>Mi historial</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botones}
-          onPress={() => router.push("/vistas/registrar")}>
-          <MaterialIcons name="person-add-alt" size={24} color="white" />
-          <Text style={styles.textButtons}>Agregar usuario</Text>
+        <TouchableOpacity style={styles.button} onPress={()=>router.push('/perfil')}>
+          <Text style={styles.text}>Mi perfil</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={styles.botones}
-          onPress={() => router.push("/vistas/salida")}
-        >
-          <MaterialIcons name="logout" size={24} color="white" />
-          <Text style={styles.textButtons}>Registrar salida</Text>
+        <Text style={styles.estado}>Estado: 🟢 Dentro</Text>
+
+        <TouchableOpacity style={styles.logout}>
+          <Text style={styles.logoutText}>Cerrar sesión</Text>
         </TouchableOpacity>
 
+      </View>
 
     </BackgroundGradient>
   );
@@ -45,45 +36,33 @@ export default function MenuPrincipal() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  rectangulo: {
     width: '100%',
-    height: 80,
-    backgroundColor: '#8d1a83',
-    justifyContent: 'center',
-    paddingLeft: 20,
-  },
-  titulo: {
-    color: 'white',
-    fontSize: 22,
-    fontWeight: 'bold'
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
+    marginTop: 20,
     alignItems: 'center'
   },
-  botones: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: 300, 
-    height: 55,
-    backgroundColor: '#6F42C1', 
-    borderColor: '#7A4ECA',    
-    borderWidth: 3,
-    borderRadius: 22,          
-    paddingHorizontal: 15,
-    marginBottom: 30,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4
+  button: {
+    width: '100%',
+    backgroundColor: '#4A2E91',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15
   },
-  textButtons: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-    marginLeft: 15
+  text: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  estado: {
+    marginTop: 20,
+    fontSize: 18,
+    color: '#4A2E91',
+    fontWeight: 'bold'
+  },
+  logout: {
+    marginTop: 30
+  },
+  logoutText: {
+    color: 'red',
+    fontWeight: 'bold'
   }
 });
