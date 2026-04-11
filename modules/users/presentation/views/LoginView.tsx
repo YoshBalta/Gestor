@@ -1,8 +1,10 @@
-import { BackgroundGradient } from '@/components/backgroundGradiente';
-import { useAuth } from '@/context/AuthContext'; // 👈 IMPORTANTE
+import { BackgroundGradient } from '@/components/backgroundGradiente'; //
+import { BotonMain } from '@/components/buttons';
+import { InputsLogueo } from '@/components/InputsLogueo';
+import { useAuth } from '@/context/AuthContext';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function LoginScreen() {
 
@@ -32,28 +34,31 @@ export default function LoginScreen() {
 
       <View style={styles.form}>
 
-        <TextInput
-          placeholder="Usuario"
+        <InputsLogueo
+          texto='Usuario'
           value={user}
-          onChangeText={setUserInput}
-          style={styles.input}
+          onChangeText={(text: any) => setUser(text)}
+          icono='person'
+          
         />
 
-        <TextInput
-          placeholder="Contraseña"
+        <InputsLogueo
+          texto='Contraseña'
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
-          style={styles.input}
+          valor={true}
+          icono='key'
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Iniciar sesión</Text>
-        </TouchableOpacity>
+       <BotonMain
+       texto='Iniciar Sesión'
+       onPress={() => router.push('/vistas/menu')}
+       ></BotonMain>
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/register')}>
-          <Text style={styles.buttonText}>Crear cuenta</Text>
-        </TouchableOpacity>
+       <BotonMain
+       texto='Crear Cuenta'
+       onPress={() => router.push('/register')}
+       ></BotonMain>
 
       </View>
 
@@ -63,6 +68,7 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   form: {
+    flex:1,
     width: '100%',
     marginTop: 30,
     alignItems: 'center'

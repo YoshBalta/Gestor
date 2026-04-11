@@ -1,8 +1,9 @@
-import { BackgroundGradient } from '@/components/backgroundGradiente';
-import { useAuth } from '@/context/AuthContext';
-import { router } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { BackgroundGradient } from "@/components/backgroundGradiente";
+import { BotonMain } from "@/components/buttons";
+import { useAuth } from "@/context/AuthContext";
+import { router } from "expo-router";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function ProfileView() {
 
@@ -22,25 +23,37 @@ export default function ProfileView() {
   };
 
   return (
-    <BackgroundGradient titulo="Mi Perfil">
-
+    <BackgroundGradient 
+    titulo="Mi Perfil">
       <View style={styles.container}>
 
-        {/* 👤 Info */}
         <View style={styles.card}>
           <Text style={styles.name}>{user.nombre}</Text>
           <Text style={styles.info}>ID: {user.id}</Text>
         </View>
 
-        {/* ✏️ Editar (simulado) */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>Editar perfil</Text>
-        </TouchableOpacity>
+       <BotonMain
+       texto="Editar Perfil"
+       color="#007AFF"
+       bordeColor="#007AFF"
+       onPress={()=>''}
+       ></BotonMain>
 
-        {/* 🚪 Logout */}
-        <TouchableOpacity style={styles.logout} onPress={handleLogout}>
-          <Text style={styles.logoutText}>Cerrar sesión</Text>
-        </TouchableOpacity>
+       <BotonMain
+       texto="Cambiar contraseña"
+       color="#007AFF"
+       bordeColor="#007AFF"
+       onPress={()=>''}
+       ></BotonMain>
+
+      
+
+      <BotonMain
+       texto="Cerrar sesión"
+       color="#FF3B30"
+       bordeColor="#ee362c"
+       onPress={()=>''}
+       ></BotonMain>
 
       </View>
 
@@ -50,17 +63,19 @@ export default function ProfileView() {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    marginTop: 20,
-    alignItems: 'center'
+    flex: 1,
+    padding: 20,
+    justifyContent: "center",
+    
   },
+
   card: {
     width: '100%',
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 15,
     marginBottom: 20,
-    alignItems: 'center'
+    flex:1
   },
   name: {
     fontSize: 22,

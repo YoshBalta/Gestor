@@ -1,35 +1,43 @@
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, Text, View } from 'react-native';
+import { router } from 'expo-router';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
-  titulo?:string,
-  children: React.ReactNode; //le dice a react que puede estar renderizando diferentes componentes
+  titulo?: string,
+  children: React.ReactNode;
 }
 
-export const BackgroundGradient = ({ children,titulo }: Props) => {
+export const BackgroundGradient = ({ children, titulo }: Props) => {
   return (
-    <LinearGradient
-      colors={['#F3F4F6', '#F3F4F6', '#C592FC']}
-      locations={[0, 0.7, 1]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
-      style={styles.container}
-    >
-         {/* Encabezado */}
-        <SafeAreaView style={styles.rectangulo}>
-                <Text style={styles.titulo}>GoVisit</Text>
-                <Text style={styles.titulo}>User</Text>{/*Este campo debe llenarse automaticamente con el user del usuario logueado*/}
-        </SafeAreaView>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+      <LinearGradient
+        colors={['#F3F4F6', '#F3F4F6', '#C592FC']}
+        locations={[0, 0.7, 1]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={styles.container}
+      >
+        {/* Encabezado */}
+        <View style={styles.rectangulo}>
+           <TouchableOpacity  onPress={() => router.back()}>
+               <MaterialIcons name='arrow-back' size={24} color="#E8D9FF" />
+           </TouchableOpacity>
+          <Text style={styles.titulo}>GoVisit</Text>
+        </View>
 
-            <View style={styles.content}>
+        <View style={styles.content}>
+          <View style={styles.alinear}>
+            <Text style={styles.Mensaje}>{titulo}</Text>
+          </View>
 
-              <Text style={styles.Mensaje}>{titulo}</Text>
-                    {children}
-            </View>
+          {children}
+        </View>
 
-         <View style={styles.rectangulo2}></View>
-    </LinearGradient>
+        <View style={styles.rectangulo2}></View>
+      </LinearGradient>
+    </SafeAreaView>
   );
 };
 
@@ -42,36 +50,42 @@ const styles = StyleSheet.create({
     height: '10%',
     backgroundColor: '#4A2E91',
     justifyContent: 'space-between',
-    paddingLeft: 2,
+    padding:15,
     flexDirection:'row',
     alignItems:'center'
   
   }, rectangulo2: {
     width: '100%',
-    height: '5%',
-    backgroundColor: '#4A2E91',
-    justifyContent: 'space-between',
-    paddingLeft: 20,
-    flexDirection:'row',
-    alignItems:'center',
-  
+    height: '2%',
+    backgroundColor: '#4A2E91'
   },
   titulo: {
     color: 'white',
     fontSize: 22,
     fontWeight: 'bold',
-    padding:5
+    padding:5,
+    
   },
     content: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'stretch',
     flexDirection:'column',
     padding:20
   },
   Mensaje: {
     color: '#4A2E91',
     fontSize: 32,
-    fontWeight: 'bold'
+    fontWeight: 'bold',    
   },
+  alinear:{
+    flexDirection:'row',
+    justifyContent:'center'
+  },
+  safeArea: {
+  flex: 1,
+  backgroundColor: '#4A2E91', 
+},
+  back:{
+    
+  }
 });

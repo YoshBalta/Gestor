@@ -1,8 +1,9 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
+import { BotonMain } from '@/components/buttons';
 import { useAuth } from '@/context/AuthContext';
 import { router } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function DashboardView() {
 
@@ -26,28 +27,30 @@ export default function DashboardView() {
 
       <View style={styles.container}>
 
-        {/* 🔥 BIENVENIDA */}
-        <Text style={styles.welcome}>
-          Bienvenido, {user.nombre}
-        </Text>
+       <BotonMain
+          texto='Mi Qr'
+          onPress={()=>''}
+          icono='qr-code'
+       ></BotonMain>
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/qr')}>
-          <Text style={styles.text}>Mi QR</Text>
-        </TouchableOpacity>
+        <BotonMain 
+          texto='Mi historial'
+          onPress={()=>router.push('/historial')}
+          icono='history'
+        ></BotonMain>
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/historial')}>
-          <Text style={styles.text}>Mi historial</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/perfil')}>
-          <Text style={styles.text}>Mi perfil</Text>
-        </TouchableOpacity>
+        <BotonMain
+        texto='Mi perfil'
+        onPress={()=>router.push('/perfil')}
+        icono='person'></BotonMain>
 
         <Text style={styles.estado}>Estado: 🟢 Dentro</Text>
 
-        <TouchableOpacity style={styles.logout} onPress={handleLogout}>
-          <Text style={styles.logoutText}>Cerrar sesión</Text>
-        </TouchableOpacity>
+        <BotonMain
+        texto='Cerrar Sesion'
+        color="#FF3B30"
+        bordeColor='#ee362c'
+        onPress={()=>''}></BotonMain>
 
       </View>
 
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
   },
   estado: {
     marginTop: 20,
+    marginBottom:20,
     fontSize: 18,
     color: '#4A2E91',
     fontWeight: 'bold'

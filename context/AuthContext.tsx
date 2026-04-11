@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-
+//
 // 👇 tipo del usuario
 type User = {
   id: number;

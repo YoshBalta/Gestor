@@ -1,7 +1,9 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
+import { BotonMain } from '@/components/buttons';
+import { Inputs } from '@/components/Inputs';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function RegisterUserView() {
 
@@ -15,14 +17,35 @@ export default function RegisterUserView() {
 
       <View style={styles.form}>
 
-        <TextInput placeholder="Nombre" value={nombre} onChangeText={setNombre} style={styles.input} />
-        <TextInput placeholder="Apellidos" value={apellido} onChangeText={setApellido} style={styles.input} />
-        <TextInput placeholder="Usuario" value={user} onChangeText={setUser} style={styles.input} />
-        <TextInput placeholder="Contraseña" value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
+        <Inputs 
+        texto='Ingresa tu(s) nombre(s)'
+        value={nombre}
+        onChangeText={setNombre}>
+        </Inputs>
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/vistas/menu')}>
-          <Text style={styles.buttonText}>Registrarse</Text>
-        </TouchableOpacity>
+         <Inputs 
+        texto='Ingresa tus apellidos'
+        value={apellido}
+        onChangeText={setApellido}>
+        </Inputs>
+
+        <Inputs 
+        texto='Ingresa tu nombre de usuario'
+        value={user}
+        onChangeText={setUser}>
+        </Inputs>
+
+       <Inputs 
+        texto='Ingresa una contraseña'
+        value={password}
+        onChangeText={setPassword}
+        valor={true}>
+
+        </Inputs>
+
+        <BotonMain
+        texto='Registrarse'
+        onPress={() => router.push('/vistas/menu')}></BotonMain>
 
       </View>
 
