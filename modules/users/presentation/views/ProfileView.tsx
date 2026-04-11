@@ -1,93 +1,93 @@
-import { BackgroundGradient } from "@/components/backgroundGradiente";
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { BackgroundGradient } from '@/components/backgroundGradiente';
+import { useAuth } from '@/context/AuthContext';
+import { router } from 'expo-router';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function ProfileView() {
-  const user = {
-    nombre: "Kevin",
-    apellidos: "Torres Cortez",
-    username: "kevin123",
-    correo: "kevin@email.com",
+
+  const { user, setUser } = useAuth();
+
+  if (!user) {
+    return (
+      <BackgroundGradient titulo="Mi Perfil">
+        <Text>No hay usuario</Text>
+      </BackgroundGradient>
+    );
+  }
+
+  const handleLogout = () => {
+    setUser(null);
+    router.replace('/');
   };
 
   return (
-    <BackgroundGradient>
+    <BackgroundGradient titulo="Mi Perfil">
+
       <View style={styles.container}>
 
-        <Text style={styles.title}>Mi Perfil</Text>
-
+        {/* 👤 Info */}
         <View style={styles.card}>
-          <Text style={styles.label}>Nombre</Text>
-          <Text style={styles.value}>{user.nombre}</Text>
-
-          <Text style={styles.label}>Apellidos</Text>
-          <Text style={styles.value}>{user.apellidos}</Text>
-
-          <Text style={styles.label}>Usuario</Text>
-          <Text style={styles.value}>{user.username}</Text>
-
-          <Text style={styles.label}>Correo</Text>
-          <Text style={styles.value}>{user.correo}</Text>
+          <Text style={styles.name}>{user.nombre}</Text>
+          <Text style={styles.info}>ID: {user.id}</Text>
         </View>
 
+        {/* ✏️ Editar (simulado) */}
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Editar perfil</Text>
+          <Text style={styles.text}>Editar perfil</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Cambiar contraseña</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={[styles.button, styles.logout]}>
-          <Text style={styles.buttonText}>Cerrar sesión</Text>
+        {/* 🚪 Logout */}
+        <TouchableOpacity style={styles.logout} onPress={handleLogout}>
+          <Text style={styles.logoutText}>Cerrar sesión</Text>
         </TouchableOpacity>
 
       </View>
+
     </BackgroundGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: "center",
-    backgroundColor: "transparent", // IMPORTANTE para que se vea el gradiente
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "white",
-    marginBottom: 20,
-    textAlign: "center",
+    width: '100%',
+    marginTop: 20,
+    alignItems: 'center'
   },
   card: {
-    backgroundColor: "white",
+    width: '100%',
+    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 15,
     marginBottom: 20,
+    alignItems: 'center'
   },
-  label: {
-    fontSize: 14,
-    color: "gray",
+  name: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#4A2E91'
+  },
+  info: {
     marginTop: 10,
-  },
-  value: {
-    fontSize: 16,
-    fontWeight: "bold",
+    color: '#555'
   },
   button: {
-    padding: 12,
-    backgroundColor: "#007AFF",
-    borderRadius: 10,
-    marginBottom: 10,
-    alignItems: "center",
+    width: '100%',
+    backgroundColor: '#4A2E91',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15
+  },
+  text: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   logout: {
-    backgroundColor: "#FF3B30",
+    marginTop: 30
   },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
+  logoutText: {
+    color: 'red',
+    fontWeight: 'bold'
+  }
 });
