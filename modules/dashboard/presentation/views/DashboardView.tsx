@@ -1,10 +1,26 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
 import { BotonMain } from '@/components/buttons';
+import { useAuth } from '@/context/AuthContext';
 import { router } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function DashboardView() {
+
+  const { user, setUser } = useAuth();
+
+  if (!user) {
+    return (
+      <BackgroundGradient titulo="Inicio">
+        <Text>No hay usuario</Text>
+      </BackgroundGradient>
+    );
+  }
+
+  const handleLogout = () => {
+    setUser(null);
+    router.replace('/');
+  };
 
   return (
     <BackgroundGradient titulo="Inicio">
@@ -47,6 +63,12 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 20,
     alignItems: 'center'
+  },
+  welcome: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: '#4A2E91',
+    fontWeight: 'bold'
   },
   button: {
     width: '100%',

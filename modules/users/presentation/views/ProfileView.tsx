@@ -1,14 +1,25 @@
 import { BackgroundGradient } from "@/components/backgroundGradiente";
 import { BotonMain } from "@/components/buttons";
+import { useAuth } from "@/context/AuthContext";
+import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function ProfileView() {
-  const user = {
-    nombre: "Kevin",
-    apellidos: "Torres Cortez",
-    username: "kevin123",
-    correo: "kevin@email.com",
+
+  const { user, setUser } = useAuth();
+
+  if (!user) {
+    return (
+      <BackgroundGradient titulo="Mi Perfil">
+        <Text>No hay usuario</Text>
+      </BackgroundGradient>
+    );
+  }
+
+  const handleLogout = () => {
+    setUser(null);
+    router.replace('/');
   };
 
   return (
@@ -17,17 +28,8 @@ export default function ProfileView() {
       <View style={styles.container}>
 
         <View style={styles.card}>
-          <Text style={styles.label}>Nombre</Text>
-          <Text style={styles.value}>{user.nombre}</Text>
-
-          <Text style={styles.label}>Apellidos</Text>
-          <Text style={styles.value}>{user.apellidos}</Text>
-
-          <Text style={styles.label}>Usuario</Text>
-          <Text style={styles.value}>{user.username}</Text>
-
-          <Text style={styles.label}>Correo</Text>
-          <Text style={styles.value}>{user.correo}</Text>
+          <Text style={styles.name}>{user.nombre}</Text>
+          <Text style={styles.info}>ID: {user.id}</Text>
         </View>
 
        <BotonMain
@@ -54,6 +56,7 @@ export default function ProfileView() {
        ></BotonMain>
 
       </View>
+
     </BackgroundGradient>
   );
 }
@@ -67,33 +70,39 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: "white",
+    width: '100%',
+    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 15,
     marginBottom: 20,
     flex:1
   },
-  label: {
-    fontSize: 14,
-    color: "gray",
-    marginTop: 10,
+  name: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#4A2E91'
   },
-  value: {
-    fontSize: 16,
-    fontWeight: "bold",
+  info: {
+    marginTop: 10,
+    color: '#555'
   },
   button: {
-    padding: 12,
-    backgroundColor: "#007AFF",
-    borderRadius: 10,
-    marginBottom: 10,
-    alignItems: "center",
+    width: '100%',
+    backgroundColor: '#4A2E91',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15
+  },
+  text: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   logout: {
-    backgroundColor: "#FF3B30",
+    marginTop: 30
   },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
+  logoutText: {
+    color: 'red',
+    fontWeight: 'bold'
+  }
 });
