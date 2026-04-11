@@ -1,6 +1,7 @@
 import { BackgroundGradient } from "@/components/backgroundGradiente";
+import { BotonMain } from "@/components/buttons";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function ProfileView() {
   const user = {
@@ -11,10 +12,9 @@ export default function ProfileView() {
   };
 
   return (
-    <BackgroundGradient>
+    <BackgroundGradient 
+    titulo="Mi Perfil">
       <View style={styles.container}>
-
-        <Text style={styles.title}>Mi Perfil</Text>
 
         <View style={styles.card}>
           <Text style={styles.label}>Nombre</Text>
@@ -30,17 +30,28 @@ export default function ProfileView() {
           <Text style={styles.value}>{user.correo}</Text>
         </View>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Editar perfil</Text>
-        </TouchableOpacity>
+       <BotonMain
+       texto="Editar Perfil"
+       color="#007AFF"
+       bordeColor="#007AFF"
+       onPress={()=>''}
+       ></BotonMain>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Cambiar contraseña</Text>
-        </TouchableOpacity>
+       <BotonMain
+       texto="Cambiar contraseña"
+       color="#007AFF"
+       bordeColor="#007AFF"
+       onPress={()=>''}
+       ></BotonMain>
 
-        <TouchableOpacity style={[styles.button, styles.logout]}>
-          <Text style={styles.buttonText}>Cerrar sesión</Text>
-        </TouchableOpacity>
+      
+
+      <BotonMain
+       texto="Cerrar sesión"
+       color="#FF3B30"
+       bordeColor="#ee362c"
+       onPress={()=>''}
+       ></BotonMain>
 
       </View>
     </BackgroundGradient>
@@ -52,20 +63,15 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
-    backgroundColor: "transparent", // IMPORTANTE para que se vea el gradiente
+    
   },
-  title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "white",
-    marginBottom: 20,
-    textAlign: "center",
-  },
+
   card: {
     backgroundColor: "white",
     padding: 20,
     borderRadius: 15,
     marginBottom: 20,
+    flex:1
   },
   label: {
     fontSize: 14,
