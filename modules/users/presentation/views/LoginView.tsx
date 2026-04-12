@@ -13,20 +13,40 @@ export default function LoginScreen() {
 
   const { setUser } = useAuth(); // 👈 contexto
 
-  const handleLogin = () => {
-    if (!user || !password) {
-      alert('Completa todos los campos');
+  const handleLogin = async () => {
+  if (!user || !password) {
+    alert('Completa todos los campos');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://192.168.1.42/govisit/login.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: user,
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if (!data.success) {
+      alert(data.message);
       return;
     }
 
-    // 🔥 simulamos login
-    setUser({
-      id: 1,
-      nombre: user
-    });
+    setUser(data.user);
 
     // 🔥 navegación (ajusta según tu estructura)
     router.push('/vistas/menu'); 
+
+     } catch (error) {
+    console.log(error);
+    alert('Error de conexión');
+  }
   };
 
   return (
@@ -37,7 +57,7 @@ export default function LoginScreen() {
         <InputsLogueo
           texto='Usuario'
           value={user}
-          onChangeText={(text: any) => setUser(text)}
+          onChangeText={(text: any) => setUserInput(text)}
           icono='person'
           
         />
@@ -52,7 +72,7 @@ export default function LoginScreen() {
 
        <BotonMain
        texto='Iniciar Sesión'
-       onPress={() => router.push('/vistas/menu')}
+       onPress={handleLogin}
        ></BotonMain>
 
        <BotonMain

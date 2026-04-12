@@ -4,20 +4,20 @@ import React, { createContext, useContext, useState } from 'react';
 type User = {
   id: number;
   nombre: string;
-} | null;
+  apellidos: string;
+} 
 
 // 👇 tipo del contexto
 type AuthContextType = {
-  user: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
+  user: User | null;
+  setUser:(user: User | null) => void;
 };
 
 // 👇 crear contexto con tipo
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-
-  const [user, setUser] = useState<User>(null);
+export const AuthProvider = ({ children }: any) => {
+  const [user, setUser] = useState<User | null>(null);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
