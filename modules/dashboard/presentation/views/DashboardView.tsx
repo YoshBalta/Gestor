@@ -27,9 +27,14 @@ export default function DashboardView() {
 
       <View style={styles.container}>
 
+        {/* 🔥 BIENVENIDA */}
+        <Text style={styles.welcome}>
+          Bienvenido, {user.nombre}
+        </Text>
+
        <BotonMain
           texto='Mi Qr'
-          onPress={()=>''}
+          onPress={()=>router.push('/qr')}
           icono='qr-code'
        ></BotonMain>
 
@@ -50,7 +55,7 @@ export default function DashboardView() {
         texto='Cerrar Sesion'
         color="#FF3B30"
         bordeColor='#ee362c'
-        onPress={()=>''}></BotonMain>
+        onPress={handleLogout}></BotonMain>
 
       </View>
 
