@@ -19,7 +19,7 @@ export default function DashboardView() {
 
   const handleLogout = () => {
     setUser(null);
-    router.replace('/');
+    router.replace('/login');
   };
 
   return (

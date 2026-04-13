@@ -1,49 +1,62 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
 import { useAuth } from '@/context/AuthContext';
-import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { useFocusEffect } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function HistorialView() {
 
+const [registros, setRegistros] = useState<Registro[]>([]);
   const { user } = useAuth();
 
-  if (!user) {
-    return (
-      <BackgroundGradient titulo="Historial">
-        <Text>No hay usuario</Text>
-      </BackgroundGradient>
-    );
+  useFocusEffect(
+  useCallback(() => {
+    obtenerHistorial();
+  }, [])
+);
+
+  const obtenerHistorial = async () => {
+
+  if (!user) return;
+
+  try {
+    const response = await fetch('http://192.168.1.42/govisit/historial.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: user.id })
+    });
+
+    const data = await response.json();
+
+    if (!data.success) return;
+
+    setRegistros(data.data);
+
+  } catch (error) {
+    console.log(error);
   }
+};
 
-  const historial = [
-    { id: '1', tipo: 'Entrada', fecha: '2026-04-10', userId: 1 },
-    { id: '2', tipo: 'Salida', fecha: '2026-04-10', userId: 1 },
-    { id: '3', tipo: 'Entrada', fecha: '2026-04-09', userId: 2 },
-  ];
-
-  const misRegistros = historial.filter(
-    (item) => item.userId === user.id
-  );
+type Registro = {
+  tipo: string;
+  fecha: string;
+};
 
   return (
     <BackgroundGradient titulo="Mi Historial">
 
       <View style={styles.container}>
 
-        {misRegistros.length === 0 ? (
-          <Text>No hay registros</Text>
-        ) : (
-          <FlatList
-            data={misRegistros}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <View style={styles.card}>
-                <Text style={styles.tipo}>{item.tipo}</Text>
-                <Text>{item.fecha}</Text>
-              </View>
-            )}
-          />
-        )}
+      {registros.map((item, index) => (
+  <View key={index} style={styles.item}>
+          <Text>
+  {item.tipo === 'entrada' ? '🟢 Entrada' : '🔴 Salida'}
+</Text>
+    <Text>{new Date(item.fecha).toLocaleString()}</Text>
+
+
+  </View>
+))}
 
       </View>
 
@@ -65,5 +78,16 @@ const styles = StyleSheet.create({
   tipo: {
     fontWeight: 'bold',
     color: '#4A2E91'
-  }
+  },
+  item: {
+  width: '100%',
+  backgroundColor: '#fff',
+  padding: 15,
+  borderRadius: 12,
+  marginBottom: 10,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  elevation: 3
+},
 });
