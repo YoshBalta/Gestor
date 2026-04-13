@@ -28,7 +28,7 @@ export default function ProfileView() {
       <View style={styles.container}>
 
         <View style={styles.card}>
-          <Text style={styles.name}>{user.nombre}</Text>
+          <Text style={styles.name}>{user.nombre} {user.apellidos}</Text>
           <Text style={styles.info}>ID: {user.id}</Text>
         </View>
 
@@ -52,7 +52,7 @@ export default function ProfileView() {
        texto="Cerrar sesión"
        color="#FF3B30"
        bordeColor="#ee362c"
-       onPress={()=>''}
+       onPress={handleLogout  }
        ></BotonMain>
 
       </View>
