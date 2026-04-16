@@ -1,13 +1,45 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
 import { BotonMain } from '@/components/buttons';
 import { useAuth } from '@/context/AuthContext';
-import { router } from 'expo-router';
-import React from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function DashboardView() {
 
   const { user, setUser } = useAuth();
+  const [estado, setEstado] = useState('cargando...');
+  const [fecha, setFecha] = useState('');
+
+  useFocusEffect(
+  useCallback(() => {
+    obtenerEstado();
+  }, [])
+);
+
+  const obtenerEstado = async () => {
+
+  if (!user) return;
+
+  try {
+    const response = await fetch('http://192.168.1.42/govisit/estado.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: user.id })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setEstado(data.estado);
+      setFecha(data.fecha);
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
   if (!user) {
     return (
@@ -49,7 +81,25 @@ export default function DashboardView() {
         onPress={()=>router.push('/perfil')}
         icono='person'></BotonMain>
 
-        <Text style={styles.estado}>Estado: 🟢 Dentro</Text>
+        <View style={styles.cardEstado}>
+
+          <Text style={styles.estadoText}>
+            {estado === 'cargando...'
+              ? '⏳ Cargando...'
+              : estado === 'dentro'
+                ? '🟢 Dentro'
+                : '🔴 Fuera'}
+          </Text>
+
+          {fecha && (
+            <Text style={styles.fechaText}>
+              Último registro:
+              {'\n'}
+              {new Date(fecha).toLocaleString()}
+            </Text>
+          )}
+
+        </View>
 
         <BotonMain
         texto='Cerrar Sesion'
@@ -69,6 +119,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: 'center'
   },
+  estadoText: {
+  fontSize: 20,
+  fontWeight: 'bold',
+},
+  fechaText: {
+  marginTop: 10,
+  color: '#555',
+  textAlign: 'center'
+},
+  cardEstado: {
+  width: '100%',
+  backgroundColor: '#fff',
+  padding: 20,
+  borderRadius: 15,
+  elevation: 5,
+  alignItems: 'center',
+  marginTop: 20,
+  marginBottom:30
+},
   welcome: {
     fontSize: 18,
     marginBottom: 20,

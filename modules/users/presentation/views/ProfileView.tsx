@@ -1,9 +1,8 @@
 import { BackgroundGradient } from "@/components/backgroundGradiente";
-import { BotonMain } from "@/components/buttons";
 import { useAuth } from "@/context/AuthContext";
 import { router } from "expo-router";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function ProfileView() {
 
@@ -22,38 +21,64 @@ export default function ProfileView() {
     router.replace('/');
   };
 
+ 
   return (
-    <BackgroundGradient 
-    titulo="Mi Perfil">
+    <BackgroundGradient titulo="Mi Perfil">
+
       <View style={styles.container}>
 
-        <View style={styles.card}>
-          <Text style={styles.name}>{user.nombre} {user.apellidos}</Text>
-          <Text style={styles.info}>ID: {user.id}</Text>
+       <View style={styles.card}>
+
+        {/* 🔥 LOGO */}
+        <Image
+          source={require('@/assets/images/logoIn.png')} // 👈 cambia ruta
+          style={styles.logo}
+          resizeMode="contain"
+        />
+
+        {/* 🔥 NOMBRE COMPLETO */}
+        <Text style={styles.nombre}>
+          {user.nombre} {user.apellidos}
+        </Text>
+
+        <View style={styles.infoBox}>
+        <Text style={styles.label}>Usuario</Text>
+        <Text style={styles.value}>
+          @{user.username}
+        </Text>
         </View>
 
-       <BotonMain
-       texto="Editar Perfil"
-       color="#007AFF"
-       bordeColor="#007AFF"
-       onPress={()=>''}
-       ></BotonMain>
+        {/* 🔥 INFO */}
+        <View style={styles.infoBox}>
+          <Text style={styles.label}>Nombre</Text>
+          <Text style={styles.value}>{user.nombre}</Text>
+        </View>
 
-       <BotonMain
-       texto="Cambiar contraseña"
-       color="#007AFF"
-       bordeColor="#007AFF"
-       onPress={()=>''}
-       ></BotonMain>
+        <View style={styles.infoBox}>
+          <Text style={styles.label}>Apellidos</Text>
+          <Text style={styles.value}>{user.apellidos}</Text>
+        </View>
 
-      
+        <View style={styles.infoBox}>
+          <Text style={styles.label}>ID</Text>
+          <Text style={styles.value}>{user.id}</Text>
+        </View>
 
-      <BotonMain
-       texto="Cerrar sesión"
-       color="#FF3B30"
-       bordeColor="#ee362c"
-       onPress={handleLogout  }
-       ></BotonMain>
+      </View>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push('/editProfile')}
+        >
+          <Text style={styles.buttonText}>Editar perfil</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push('/changePassword')}
+        >
+          <Text style={styles.buttonText}>Cambiar contraseña</Text>
+        </TouchableOpacity>
 
       </View>
 
@@ -65,17 +90,45 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: "center",
-    
+    justifyContent: "center",   
   },
+  logo: {
+  width: 80,
+  height: 80,
+  marginBottom: 10
+},
 
+infoBox: {
+  width: '100%',
+  marginTop: 10
+},
+  nombre: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#4A2E91',
+    marginBottom: 10
+  },
+  label: {
+    fontSize: 12,
+    color: '#777'
+  },
+   value: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10
+  },
   card: {
     width: '100%',
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 15,
     marginBottom: 20,
-    flex:1
+    alignItems: 'center'
+  },
+   buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   name: {
     fontSize: 22,
