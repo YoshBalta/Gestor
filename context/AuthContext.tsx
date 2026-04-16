@@ -5,6 +5,7 @@ type User = {
   id: number;
   nombre: string;
   apellidos: string;
+  username: string;
 } 
 
 // 👇 tipo del contexto
