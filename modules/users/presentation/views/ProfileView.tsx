@@ -16,12 +16,6 @@ export default function ProfileView() {
     );
   }
 
-  const handleLogout = () => {
-    setUser(null);
-    router.replace('/');
-  };
-
- 
   return (
     <BackgroundGradient titulo="Mi Perfil">
 

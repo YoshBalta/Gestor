@@ -1,7 +1,7 @@
 import { BackgroundGradient } from '@/components/backgroundGradiente';
 import { BotonMain } from '@/components/buttons';
 import { useAuth } from '@/context/AuthContext';
-import { router, useFocusEffect } from 'expo-router';
+import { router, Stack, useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -22,7 +22,7 @@ export default function DashboardView() {
   if (!user) return;
 
   try {
-    const response = await fetch('http://192.168.1.42/govisit/estado.php', {
+    const response = await fetch('http://192.168.1.37/govisit/estado.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: user.id })
@@ -56,6 +56,8 @@ export default function DashboardView() {
 
   return (
     <BackgroundGradient titulo="Inicio">
+
+      <Stack.Screen options={{ headerShown: false }} />
 
       <View style={styles.container}>
 

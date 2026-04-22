@@ -1,122 +1,121 @@
-import { BackgroundGradient } from '@/components/backgroundGradiente'; //
+import AlertCard from '@/components/alertCard';
+import { BackgroundGradient } from '@/components/backgroundGradiente';
 import { BotonMain } from '@/components/buttons';
 import { InputsLogueo } from '@/components/InputsLogueo';
 import { useAuth } from '@/context/AuthContext';
-import { router } from 'expo-router';
-import React, { useState } from 'react';
+import { router, Stack } from 'expo-router';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export default function LoginScreen() {
 
-  const [user, setUserInput] = useState(''); // 👈 renombrado
+  const [user, setUserInput] = useState('');
   const [password, setPassword] = useState('');
+  const [mensaje, setMensaje] = useState('');
+  const [tipoMensaje, setTipoMensaje] = useState('');
 
-  const { setUser } = useAuth(); // 👈 contexto
+  const { setUser } = useAuth();
 
   const handleLogin = async () => {
-  if (!user || !password) {
-    alert('Completa todos los campos');
-    return;
-  }
 
-  try {
-    const response = await fetch('http://192.168.1.42/govisit/login.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: user,
-        password: password
-      })
-    });
-
-    const data = await response.json();
-
-    if (!data.success) {
-      alert(data.message);
+    if (!user || !password) {
+      setMensaje('Completa todos los campos');
+      setTipoMensaje('error');
       return;
     }
 
-    setUser(data.user);
+    try {
+      const response = await fetch('http://192.168.1.37/govisit/login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: user,
+          password: password
+        })
+      });
 
-    // 🔥 navegación (ajusta según tu estructura)
-    router.push('/vistas/menu'); 
+      const data = await response.json();
 
-     } catch (error) {
-    console.log(error);
-    alert('Error de conexión');
-  }
+      if (!data.success) {
+        setMensaje(data.message || 'Error al iniciar sesión');
+        setTipoMensaje('error');
+        return;
+      }
+
+      setMensaje('Inicio de sesión exitoso');
+      setTipoMensaje('success');
+
+      setUser(data.user);
+
+      setTimeout(() => {
+        router.replace('/vistas/menu');
+      }, 1000);
+
+    } catch (error) {
+      console.log(error);
+      setMensaje('Error de conexión');
+      setTipoMensaje('error');
+    }
   };
 
+  useEffect(() => {
+    if (mensaje) {
+      const timer = setTimeout(() => {
+        setMensaje('');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
+
   return (
-    <BackgroundGradient titulo="Iniciar Sesión">
+    <>
+      {/* 🔥 ESTO ELIMINA LA FLECHA */}
+      <Stack.Screen options={{ headerShown: false }} />
 
-      <View style={styles.form}>
+      <BackgroundGradient titulo="Iniciar Sesión">
 
-        <InputsLogueo
-          texto='Usuario'
-          value={user}
-          onChangeText={(text: any) => setUserInput(text)}
-          icono='person'
-          
-        />
+        <View style={styles.form}>
 
-        <InputsLogueo
-          texto='Contraseña'
-          value={password}
-          onChangeText={setPassword}
-          valor={true}
-          icono='key'
-        />
+          <AlertCard message={mensaje} type={tipoMensaje} />
 
-       <BotonMain
-       texto='Iniciar Sesión'
-       onPress={handleLogin}
-       ></BotonMain>
+          <InputsLogueo
+            texto='Usuario'
+            value={user}
+            onChangeText={(text: any) => setUserInput(text)}
+            icono='person'
+          />
 
-       <BotonMain
-       texto='Crear Cuenta'
-       onPress={() => router.push('/register')}
-       ></BotonMain>
+          <InputsLogueo
+            texto='Contraseña'
+            value={password}
+            onChangeText={setPassword}
+            valor={true}
+            icono='key'
+          />
 
-      </View>
+          <BotonMain
+            texto='Iniciar Sesión'
+            onPress={handleLogin}
+          />
 
-    </BackgroundGradient>
+          <BotonMain
+            texto='Crear Cuenta'
+            onPress={() => router.push('/register')}
+          />
+
+        </View>
+
+      </BackgroundGradient>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   form: {
-    flex:1,
+    flex: 1,
     width: '100%',
     marginTop: 30,
     alignItems: 'center'
-  },
-  input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 15,
-    backgroundColor: '#fff'
-  },
-  button: {
-    width: '100%',
-    backgroundColor: '#4A2E91',
-    padding: 14,
-    borderRadius: 10,
-    marginTop: 10
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  },
-  link: {
-    marginTop: 20,
-    color: '#4A2E91',
-    fontWeight: 'bold'
   }
 });
