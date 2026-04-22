@@ -1,8 +1,9 @@
+import AlertCard from '@/components/alertCard';
 import { BackgroundGradient } from '@/components/backgroundGradiente';
 import { useAuth } from '@/context/AuthContext';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function ChangePasswordView() {
 
@@ -10,6 +11,9 @@ export default function ChangePasswordView() {
 
   const [actual, setActual] = useState('');
   const [nueva, setNueva] = useState('');
+
+  const [mensaje, setMensaje] = useState('');
+  const [tipoMensaje, setTipoMensaje] = useState('');
 
   if (!user) {
     return (
@@ -22,12 +26,13 @@ export default function ChangePasswordView() {
   const handleChangePassword = async () => {
 
     if (!actual || !nueva) {
-      Alert.alert('Error', 'Completa todos los campos');
+      setMensaje('Completa todos los campos');
+      setTipoMensaje('error');
       return;
     }
 
     try {
-      const response = await fetch('http://192.168.1.42/govisit/changePassword.php', {
+      const response = await fetch('http://192.168.1.37/govisit/changePassword.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -40,24 +45,45 @@ export default function ChangePasswordView() {
       const data = await response.json();
 
       if (!data.success) {
-        Alert.alert('Error', data.message);
+        setMensaje(data.message || 'Error al cambiar contraseña');
+        setTipoMensaje('error');
         return;
       }
 
-      Alert.alert('Éxito', 'Contraseña actualizada');
+      // 🔥 ÉXITO
+      setMensaje('Contraseña actualizada correctamente');
+      setTipoMensaje('success');
 
-      router.back();
+      // ⏳ pequeño delay para UX
+      setTimeout(() => {
+        router.back();
+      }, 1200);
 
     } catch (error) {
       console.log(error);
-      Alert.alert('Error', 'Error de conexión');
+      setMensaje('Error de conexión');
+      setTipoMensaje('error');
     }
   };
+
+  // 🔥 AUTO OCULTAR
+  useEffect(() => {
+    if (mensaje) {
+      const timer = setTimeout(() => {
+        setMensaje('');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
 
   return (
     <BackgroundGradient titulo="Cambiar Contraseña">
 
       <View style={styles.container}>
+
+        {/* 🔥 ALERT */}
+        <AlertCard message={mensaje} type={tipoMensaje} />
 
         <TextInput
           style={styles.input}
